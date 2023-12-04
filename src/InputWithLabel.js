@@ -25,7 +25,7 @@ function InputWithLabel({
             value={value}
             onChange={onChange}
             ref={inputRef}
-        ></input>
+        />
     </>
   );
 }
