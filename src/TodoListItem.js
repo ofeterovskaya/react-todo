@@ -1,4 +1,3 @@
-import React from "react";
 
 function TodoListItem({task, onRemoveTodo}) {
     const {id} = task;

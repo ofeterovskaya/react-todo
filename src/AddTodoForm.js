@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import InputWithLabel from "./InputWithLabel";
 
 function AddTodoForm ({onAddTodo}) {
@@ -16,7 +16,7 @@ function AddTodoForm ({onAddTodo}) {
         onAddTodo ({
             title: todoTitle,
             //generate a unique number
-            id: Date.now(),
+            // id: Date.now(),
         });
         //pass title and id
         setTodoTitle("");
