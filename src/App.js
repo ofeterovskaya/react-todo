@@ -1,39 +1,46 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
-import InputWithLabel from "./InputWithLabel";
-
-// function useSemiPersistentState() {
-//   const savedTodoList = JSON.parse(localStorage.getItem("savedTodoList")) || [];
-//   const [todoList, setTodoList] = useState(savedTodoList);
-
-//   useEffect(() => {
-//     localStorage.setItem ("savedTodoList", JSON.stringify(todoList));
-//   }, [todoList]);
-//     return [todoList,setTodoList];
-// }
-
+//import InputWithLabel from "./InputWithLabel";
 
 function App() {
-   const [todoList, setTodoList] = useState([]);
-   const [isLoading, setIsLoading] = useState(true);
-   const [workInProgress, serWorkInProgress] = useState(true);
+  const [todoList, setTodoList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const fetchData = async() => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+    };
 
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
-   //async with Promise, resolve, setTime when refresh page in 2 sec  the saved item appears in the list
-   useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          data: {
-            todoList: JSON.parse(localStorage.getItem("savedTodoList")) || [],
-          },
-        });
-      }, 2000);
-    }).then((result) => {
-      setTodoList(result.data.todoList);
+    try {
+      const response = await fetch (url, options);
+      if (!response.ok) {
+        const message = `Error has ocurred: ${response.status}`;
+          throw new Error(message);
+      }
+      const data = await response.json();
+     
+      const todos = data.records.map((record) => ({
+        title: record.fields.title,
+        id: record.id,      
+      }));
+
+      setTodoList(todos);
       setIsLoading(false);
-    });
+
+    } catch (error) {
+      console.log("Error fetching data: ",error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   //Add Loading State
@@ -44,12 +51,12 @@ function App() {
   }, [todoList, isLoading]);
 
 
-   function addTodo (newTodo) {
+  const addTodo = newTodo => {
     // setTodoList ([...todoList, newTodo]) USE PREVTODO!!!
     setTodoList(prevTodoList => ([ ...prevTodoList, newTodo ]))
   }  
   
-  function removeTodo(id) {
+  const removeTodo = id => {
     // setTodoList(prevTodoList.filter((todo) => todo.id !== id));
     setTodoList(prevTodoList => prevTodoList.filter(todo => todo.id !== id));
   };
@@ -65,7 +72,7 @@ function App() {
       ) : (
             <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
           )}   
-    {workInProgress && <p>Work in progress...</p>}
+
     </>
     );
 }
