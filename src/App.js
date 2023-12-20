@@ -1,21 +1,21 @@
-import {useState, useEffect} from 'react';
+import {useCallback, useState, useEffect} from 'react';
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
-//import InputWithLabel from "./InputWithLabel";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
-  const fetchData = async() => {
+  const fetchData = useCallback(async () => {
     const options = {
       method: "GET",
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
       },
-    };
+    } ;
 
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+  const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
     try {
       const response = await fetch (url, options);
@@ -37,11 +37,11 @@ function App() {
       console.log("Error fetching data: ",error);
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   //Add Loading State
   useEffect(() => {
@@ -51,30 +51,103 @@ function App() {
   }, [todoList, isLoading]);
 
 
-  const addTodo = newTodo => {
+  const addTodo = async(newTodo) => {
     // setTodoList ([...todoList, newTodo]) USE PREVTODO!!!
-    setTodoList(prevTodoList => ([ ...prevTodoList, newTodo ]))
-  }  
+   // setTodoList(prevTodoList => ([ ...prevTodoList, newTodo ]))
+   await postTodo(newTodo);
   
-  const removeTodo = id => {
-    // setTodoList(prevTodoList.filter((todo) => todo.id !== id));
-    setTodoList(prevTodoList => prevTodoList.filter(todo => todo.id !== id));
+  }  
+  const postTodo = async (newTodo) => {
+    try {
+      const airtableData = {
+        fields: {
+          title: newTodo.title
+        },
+      };
+  
+      const response = await fetch(
+        `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+          },
+          body: JSON.stringify(airtableData),
+        }
+      );
+  
+      if (!response.ok) {
+        const message = `Error has ocurred:${response.status}`;
+        throw new Error(message);
+      }
+  
+      const dataResponse = await response.json();
+      return dataResponse;
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  };
+
+  const removeTodo = async(id) => {
+    await deleteTodo(id)
+  };
+
+  const deleteTodo = async (id) => {
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
+
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error has occurred: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
   };
 
   return (
-    <>
-      
-      <h1 >To Do List</h1>
-      <AddTodoForm onAddTodo = {addTodo}/>
-      {/* Create Conditional Loading Indicator loading message is visible in 2 seconds loading disappears but the Todo List visible */}
-      {isLoading ? (
-          <p>Loading...</p>
-      ) : (
-            <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-          )}   
-
-    </>
-    );
+    <BrowserRouter>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <h1>Todo List</h1>
+                <AddTodoForm onAddTodo={addTodo} />
+                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+              </>
+            )
+          }
+        />
+  
+        <Route
+          path="/new"
+          element={
+            <>
+              <h1>New Todo List</h1>
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
+
 
 export default App;
