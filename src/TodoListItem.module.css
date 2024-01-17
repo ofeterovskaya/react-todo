@@ -1,0 +1,109 @@
+/* import styled from 'styled-components'; */
+@import url("https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong");
+
+body {
+   background-image: linear-gradient(to right,rgb(159, 216, 231),rgb(240, 138, 223));
+   font-family: 'Salsa', italic;
+   padding: 40px;
+   text-align: center;   
+   font-size:30px;
+   color:rgb(2, 43, 40);   
+ }  
+h1 {
+   font-family: "Audiowide", sans-serif;   
+   }
+    
+.ListItem {
+   font-family: "Sofia", sans-serif;
+   color: rgb(68, 2, 38);
+   margin: 5px;
+   list-style-type: none;
+}
+button {
+   font-family: "Trirong";
+   font-weight: bold;
+   margin-top: 1%;
+   margin-left: 1%;
+   padding: 5px;
+   cursor: pointer;
+   border: 1px solid #024646;
+   border-radius: 5px;
+   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
+}
+button:hover {
+   color:rgb(248, 248, 248);
+   background-color:rgba(0, 11, 11, 0.5);
+}
+.AddButton {
+   color:rgb(248, 248, 248);
+   background-color:rgba(0, 11, 11, 0.5);
+   padding: 10px 30px 10px 30px;
+}
+input {
+   padding:0 5%;
+   margin: 5px;
+   border: 1px solid #024646;
+   border-radius: 5px;
+   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
+   font-size: 16px;
+   line-height: 30px;
+   width: 40%;   
+}
+.LabelItem{
+   color:  rgba(0, 11, 11, 0.5);
+   font-weight: bold;
+
+}
+
+@media (max-width: 280px) {
+
+body{ 
+   font-size: 16px;
+   font-weight: bold;
+   padding: 25px;
+}
+button {
+   margin-top: 0%;
+   margin-left: 0%;
+   padding: 2px;
+}
+.AddButton {
+   padding: 5px 20px 5px 20px;
+}
+input {
+   line-height: 30px;
+   width: 80%; 
+}
+.TodoListContent {
+   display: inline;
+   padding: 25px;
+}
+.ListItem {
+ margin-top: 10%;  
+}
+}
+
+@media (max-width: 376px) {
+body{ 
+   font-size: 20px;
+}
+button {
+   margin-left: 3%;
+   padding: 2px;
+}
+.AddButton {
+   padding: 5px 30px 5px 30px;
+}
+input {
+   line-height: 30px;
+   width: 80%; 
+}
+.TodoListContent {
+   display: inline;
+   padding: 25px;
+}
+.ListItem {
+   margin-top: 10%;  
+}
+}
+
