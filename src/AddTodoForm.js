@@ -1,9 +1,10 @@
 import {useState, useEffect, useRef} from 'react';
 import InputWithLabel from "./InputWithLabel";
+import styles from "./TodoListItem.module.css";
 
 function AddTodoForm ({onAddTodo}) {
     //create
-    const [todoTitle, setTodoTitle] = useState("");
+    const [todoTitle, setTodoTitle] =  useState("");
 
     function handleTitleChange (event) {
         const newTodoTitle = event.target.value;
@@ -24,7 +25,7 @@ function AddTodoForm ({onAddTodo}) {
     return (
         <form onSubmit = {handleAddTodo}>
             
-            <InputWithLabel
+            <InputWithLabel  
                 type = "text"
                 // placeholder = "New Todo"
                 name = "title" 
@@ -36,7 +37,7 @@ function AddTodoForm ({onAddTodo}) {
                 Title                    
             </InputWithLabel> 
             &nbsp;
-            <button type ="submit"> Add </button>
+            <button type ="submit" className={styles.AddButton}> Add </button>
         </form>
     );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef} from "react";
+import styles from "./TodoListItem.module.css";
 
 function InputWithLabel({ 
     type,
@@ -16,7 +17,7 @@ function InputWithLabel({
 
   return (
     <>
-      <label htmlFor={id}>{children}</label>
+      <label className = {styles.LabelItem}htmlFor={id}>{children}</label>
       &nbsp;
         <input
             type={type}
