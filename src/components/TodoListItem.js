@@ -1,37 +1,46 @@
 import { useState } from "react";
 import styles from "./TodoListItem.module.css";
+// import {image as Trashcan} from "./Trashcan.png";
 import PropTypes from "prop-types";
 
 function TodoListItem({ task, onRemoveTodo }) {
   const { title, id } = task;
 
   //for future checkbox
-//   const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <li className={styles.ListItem}>
-        {/* //checkbox in progress */}
-    {/* //<input
+    <li >
+      {/* //checkbox in progress */}
+      <input className ={styles.CheckBox}
         type="checkbox"
         id={id}
         checked={isChecked}
         onChange={() => setIsChecked(!isChecked)}
       />
-      <label
+
+      <label className={styles.ListItem}
         htmlFor={id}
         style={{ textDecoration: isChecked ? "line-through" : "none" }}
-      ></label> */}
+      ></label>
       {task.title}
-      &nbsp;
+    
       <button type="button" onClick={() => onRemoveTodo(id)}>
-        Remove
+        Delete
+        {/* <Trashcan/> */}
       </button>
+      
     </li>
   );
 }
 
+// Define propTypes for TodoListItem
 TodoListItem.propTypes = {
-    onRemoveTodo: PropTypes.func.isRequired,
+  task: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+  }).isRequired,
+  onRemoveTodo: PropTypes.func.isRequired,
 };
 
 export default TodoListItem;

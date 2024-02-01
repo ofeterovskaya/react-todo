@@ -17,8 +17,6 @@ function AddTodoForm({ onAddTodo }) {
     event.preventDefault();
     onAddTodo({
       title: todoTitle,
-      //generate a unique number
-      // id: Date.now(),
     });
     //pass title and id
     setTodoTitle("");
