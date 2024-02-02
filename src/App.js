@@ -1,48 +1,61 @@
-import {useCallback, useState, useEffect} from 'react';
-import TodoList from "./TodoList";
-import AddTodoForm from "./AddTodoForm";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import styles from "./TodoListItem.module.css";
+import { useCallback, useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TodoList from "./components/TodoList";
+import AddTodoForm from "./components/AddTodoForm";
+import Toggle from "./components/Toggle.js";
+import styles from "./components/TodoListItem.module.css";
+// import InputWithLabel from './components/InputWithLabel';
+// import styles from './components/TodoListItem.module.css';
+
+const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
+
+  //Toggle btn
+  const [isDarkMode, setIsDarkMode, toggle, setToggle] = useState(false);
+  const handleToggleChange = () => {
+    setToggle(!toggle);
+  };
+
+  //Checkbox
+  const [checked, setChecked] = useState(false);
+  function handleChange(e) {
+    setChecked(e.target.checked);
+  }
+
   const fetchData = useCallback(async () => {
     const options = {
       method: "GET",
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
       },
-    } ;
-
-  const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
-
+    };
     try {
-      const response = await fetch (url, options);
+      const response = await fetch(url, options);
       if (!response.ok) {
         const message = `Error has ocurred: ${response.status}`;
-          throw new Error(message);
+        throw new Error(message);
       }
       const data = await response.json();
-     
       const todos = data.records.map((record) => ({
         title: record.fields.title,
-        id: record.id,      
+        id: record.id,
       }));
 
       setTodoList(todos);
       setIsLoading(false);
-
     } catch (error) {
-      console.log("Error fetching data: ",error);
+      console.log("Error fetching data: ", error);
       setIsLoading(false);
     }
-  }, []);
+  }); //getting warner abt array React Hook useCallback has a missing dependency: 'url'. Either include it or remove the dependency array
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   //Add Loading State
   useEffect(() => {
@@ -51,66 +64,79 @@ function App() {
     }
   }, [todoList, isLoading]);
 
+  // Adding new todo items function
+  const addTodo = async (newTodo) => {
+    // Define Airtable data format for the POST request
+    const airtableData = {
+      fields: {
+        title: newTodo.title,
+      },
+    };
+    // Define the URL for adding a new todo
+    //const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
 
-  const addTodo = async(newTodo) => {
-    // setTodoList ([...todoList, newTodo]) USE PREVTODO!!!
-   // setTodoList(prevTodoList => ([ ...prevTodoList, newTodo ]))
-   await postTodo(newTodo);
-  
-  }  
-  const postTodo = async (newTodo) => {
+    //  Define access credentials for POST request
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify(airtableData),
+    };
+
     try {
-      const airtableData = {
-        fields: {
-          title: newTodo.title
-        },
-      };
-  
-      const response = await fetch(
-        `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
-          },
-          body: JSON.stringify(airtableData),
-        }
-      );
-  
+      // Send a POST request to add a new todo. Fetch data from the API
+      const response = await fetch(url, options);
+
+      // Check if the response is not successful
       if (!response.ok) {
-        const message = `Error has ocurred:${response.status}`;
+        const message = `Error has ocurred: ${response.status}`;
         throw new Error(message);
       }
-  
-      const dataResponse = await response.json();
-      return dataResponse;
+
+      // Parse the JSON response and update the todoList state
+
+      // const dataResponse = await response.json();
+      // return dataResponse; didn't print out on the page
+
+      const addedTodo = await response.json();
+      setTodoList([
+        ...todoList,
+        { id: addedTodo.id,
+          title: addedTodo.fields.title },
+      ]);
+
+      // Handle errors during adding a todo
     } catch (error) {
-      console.log(error.message);
+      console.log("Error fetching data:", error.message);
       return null;
     }
   };
 
-  const removeTodo = async(id) => {
-    await deleteTodo(id)
-  };
+  //Delete function
+
+  // const removeTodo = async(id) => {
+  //   await deleteTodo(id)
+  // };
 
   const deleteTodo = async (id) => {
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
+    //console.log(url);
 
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    };
     try {
-      const response = await fetch(url, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-
+      const response = await fetch(url, options);
       if (!response.ok) {
         throw new Error(`Error has occurred: ${response.status}`);
       }
-
+      fetchData(); //deleting items from todo list
       return await response.json();
     } catch (error) {
       console.log(error.message);
@@ -118,6 +144,7 @@ function App() {
     }
   };
 
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -129,18 +156,30 @@ function App() {
               <p>Loading...</p>
             ) : (
               <>
+                {/* //Toggle btn is in progress */}
+                <div className={styles.Toggle}>
+                  <Toggle
+                    toggle={toggle}
+                    handleToggleChange={handleToggleChange}
+                    onSwitch={setIsDarkMode}
+                  />
+                </div>
+
                 <h1>Todo List</h1>
                 <AddTodoForm onAddTodo={addTodo} />
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                <TodoList todoList={todoList} onRemoveTodo={deleteTodo} />
               </>
             )
           }
         />
-  
+
         <Route
           path="/new"
           element={
             <>
+              <div>
+                <Toggle isDarkMode={isDarkMode} />
+              </div>
               <h1>New Todo List</h1>
               <p>Hello World</p>
             </>
@@ -150,6 +189,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;
