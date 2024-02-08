@@ -2,30 +2,29 @@ import { useCallback, useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TodoList from "./components/TodoList";
 import AddTodoForm from "./components/AddTodoForm";
-import Toggle from "./components/Toggle.js";
+import Toggle from "./components/Toggle";
 import styles from "./components/TodoListItem.module.css";
+import { P5Wrapper } from "./components/Background";
+import background from "./components/Background";
+import TodoContainer from './components/TodoContainer'; 
+
 // import InputWithLabel from './components/InputWithLabel';
 // import styles from './components/TodoListItem.module.css';
+// import Checkbox from "./components/Checkbox"
 
 const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  
 
-  //Toggle btn
+  //Toggle/SwitchMode btn in
   const [isDarkMode, setIsDarkMode, toggle, setToggle] = useState(false);
   const handleToggleChange = () => {
     setToggle(!toggle);
   };
 
-  //Checkbox
-  const [checked, setChecked] = useState(false);
-  function handleChange(e) {
-    setChecked(e.target.checked);
-  }
-
+  //Getting data form Airtable Method GET
   const fetchData = useCallback(async () => {
     const options = {
       method: "GET",
@@ -51,31 +50,15 @@ function App() {
       console.log("Error fetching data: ", error);
       setIsLoading(false);
     }
-  }); //getting warner abt array React Hook useCallback has a missing dependency: 'url'. Either include it or remove the dependency array
-
-  useEffect(() => {
-    fetchData();
   }, []);
 
-  //Add Loading State
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-    }
-  }, [todoList, isLoading]);
-
-  // Adding new todo items function
+  // Adding new todo items function Method POST
   const addTodo = async (newTodo) => {
-    // Define Airtable data format for the POST request
     const airtableData = {
       fields: {
         title: newTodo.title,
       },
     };
-    // Define the URL for adding a new todo
-    //const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
-
-    //  Define access credentials for POST request
     const options = {
       method: "POST",
       headers: {
@@ -103,8 +86,7 @@ function App() {
       const addedTodo = await response.json();
       setTodoList([
         ...todoList,
-        { id: addedTodo.id,
-          title: addedTodo.fields.title },
+        { id: addedTodo.id, title: addedTodo.fields.title },
       ]);
 
       // Handle errors during adding a todo
@@ -114,12 +96,41 @@ function App() {
     }
   };
 
-  //Delete function
+  //Checkbox  Method PATCH
+  const updateData = useCallback(async (id, newValue) => {
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
 
-  // const removeTodo = async(id) => {
-  //   await deleteTodo(id)
-  // };
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        // "Authorization": `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+      },
+      body: JSON.stringify({
+        fields: {
+          CheckBox: newValue.Checkbox,
+        },
+      }),
+    };
 
+    console.log(`Updating record with id: ${id}, newValue: ${newValue}`);
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const message = `Error has ocurred: ${response.status}`;
+        throw new Error(message);
+      }
+      const data = await response.json();
+      // console.log(data); // Log the response data to the console
+      // console.log(`Updating record with id: ${id}, newValue:`, newValue);
+      return data;
+    } catch (error) {
+      console.log("Error updating data: ", error);
+    }
+  }, []);
+
+  //Delete items method DELETE
   const deleteTodo = async (id) => {
     const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
     //console.log(url);
@@ -144,7 +155,23 @@ function App() {
     }
   };
 
-  
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  //Add Loading State
+  useEffect(() => {
+    if (!isLoading) {
+      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+    }
+  }, [todoList, isLoading]);
+
+  //Delete function
+
+  // const removeTodo = async(id) => {
+  //   await deleteTodo(id)
+  // };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -156,18 +183,46 @@ function App() {
               <p>Loading...</p>
             ) : (
               <>
-                {/* //Toggle btn is in progress */}
-                <div className={styles.Toggle}>
-                  <Toggle
-                    toggle={toggle}
-                    handleToggleChange={handleToggleChange}
-                    onSwitch={setIsDarkMode}
-                  />
-                </div>
+                <div className ={styles.mainSection}>
+                  <>
+                    {/* Dynamic background */}
+                    <P5Wrapper sketch={background} />
+                  </>
 
-                <h1>Todo List</h1>
-                <AddTodoForm onAddTodo={addTodo} />
-                <TodoList todoList={todoList} onRemoveTodo={deleteTodo} />
+                  <div className={styles.todoSection}>
+                    {/* Toggle/SwitchMode btn*/}
+                    <div
+                      className={`${
+                        isDarkMode
+                          ? styles["dark-theme"]
+                          : styles["light-theme"]
+                      }`}
+                    >
+                      <div className={styles.Toggle}>
+                        <Toggle
+                          toggle={toggle}
+                          handleToggleChange={handleToggleChange}
+                          onSwitch={setIsDarkMode}
+                        />
+                      </div>
+
+                      <h1>Todo List</h1>
+                      <TodoContainer 
+                        // loading={loading}
+                        // setLoading={setLoading}
+                        todoList={todoList}
+                        setTodoList={setTodoList}/>
+
+                      <AddTodoForm onAddTodo={addTodo} />
+
+                      <TodoList
+                        todoList={todoList}
+                        onRemoveTodo={deleteTodo}
+                        onUpdateTodo={updateData}
+                      />
+                    </div>
+                  </div>
+                </div>
               </>
             )
           }

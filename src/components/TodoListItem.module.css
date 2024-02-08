@@ -1,28 +1,54 @@
 /* import styled from 'styled-components'; */
 @import url("https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong");
-
-body {
-   background-image: linear-gradient(to right,rgb(159, 216, 231),rgb(240, 138, 223));
+* {
+   box-sizing: border-box;
+   margin: 0px;
+   padding: 0px;
+   letter-spacing: .1em;
+   
+}
+body {  
    font-family: 'Salsa', italic;
-   padding: 40px;
+   /* padding: 10px; */
    text-align: center;   
    font-size:30px;
-   color:rgb(2, 43, 40);   
- }  
+   /* color:rgb(2, 43, 40);       */
+   align-content: center;
+   display: grid;
+   grid-template-rows: auto 1fr;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+   
+   
+} 
+.todoSection {  
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 2%;
+   margin-bottom: 2%;
+   transform: translate(-50%, -50%);
+   display: flex;
+   flex-direction: column;
+   top: 50%;
+   left: 50%;
+   position: absolute;
+   width: 80%;
+   box-sizing: border-box;
+}
 h1 {
    font-family: "Audiowide", sans-serif;   
+   text-align: center;
+   padding-left: 15%;
    }
 li {
    list-style: none
 }   
 .ListItem {
    font-family: "Sofia", sans-serif;
-   color: rgb(68, 2, 38);
    margin: 5px;   
 }
-.CheckBox {  
-   width: 20px;
-}
+
 .trashIcon {
    width: 50px;
    height: 50px;
@@ -47,8 +73,17 @@ button:hover {
    background-color:rgba(0, 11, 11, 0.5);
    padding: 10px 30px 10px 30px;
 }
+.DeleteButton{
+   color:rgb(248, 248, 248);
+   background-color:rgba(0, 11, 11, 0.5); 
+   display: block;
+   float: right;
+   margin-right: 20%;
+   width: 20%px;
+   height: 20%px;
+}
 input {
-   padding:0 5%;
+   padding:0 10px;
    margin: 5px;
    border: 1px solid #024646;
    border-radius: 5px;
@@ -60,7 +95,6 @@ input {
 .LabelItem{
    color:  rgba(0, 11, 11, 0.5);
    font-weight: bold;
-
 }
 
 .Toggle {
@@ -69,13 +103,15 @@ input {
    cursor:pointer;   
 }
 .dark-theme { 
-   color: black; 
-   background-image: white;
-  
+   color:aliceblue;
+   background-color:rgb(37, 37, 62);
+}
+.dark-theme.AddButton{
+   background-color: aliceblue;
 }
 .light-theme {
-   color:aliceblue;
-   background-color: black;
+   color: rgb(2, 11, 58);
+   background-color:rgb(167, 224, 240);
 }
 @media (max-width: 280px) {
 
