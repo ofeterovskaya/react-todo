@@ -1,9 +1,9 @@
 import { useState } from "react";
 import InputWithLabel from "./InputWithLabel";
-import styles from "./TodoListItem.module.css";
+import styles from "./AddTodo.module.css";
 import PropTypes from "prop-types";
 
-function AddTodoForm({ onAddTodo }) {
+function AddTodoForm({ onAddTodo, isDarkMode }) {
   //create
   const [todoTitle, setTodoTitle] = useState("");
 
@@ -12,7 +12,8 @@ function AddTodoForm({ onAddTodo }) {
     //update
     setTodoTitle(newTodoTitle);
   }
-
+  // In the handleAddTodo function, remove the todoTitle variable and update
+  //onAddTodo callback handler to pass our todoTitle state variable instead
   function handleAddTodo(event) {
     event.preventDefault();
     onAddTodo({
@@ -25,7 +26,6 @@ function AddTodoForm({ onAddTodo }) {
     <form onSubmit={handleAddTodo}>
       <InputWithLabel
         type="text"
-        // placeholder = "New Todo"
         name="title"
         id="todoTitle"
         value={todoTitle}
@@ -35,7 +35,10 @@ function AddTodoForm({ onAddTodo }) {
         New To Do
       </InputWithLabel>
       &nbsp;
-      <button type="submit" className={styles.AddButton}>
+      <button
+        type="submit"
+        className={`${styles.AddButton} ${isDarkMode ? styles.DarkThemeAddButton : styles.LightThemeAddButton}`}
+      >
         Add
       </button>
     </form>
@@ -44,6 +47,7 @@ function AddTodoForm({ onAddTodo }) {
 
 AddTodoForm.propTypes = {
   onAddTodo: PropTypes.func.isRequired,
+  isDarkMode: PropTypes.bool.isRequired,
 };
 
 export default AddTodoForm;

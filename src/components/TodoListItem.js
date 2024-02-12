@@ -1,3 +1,7 @@
+//  TodoListItems receives a task object and two functions (onRemoveTodo and updateData) as props.
+// It uses the useState hook to manage the checked state of the checkbox,
+// and it updates this state and calls updateData when the checkbox is clicked.
+
 import { useState } from "react";
 import styles from "./TodoListItem.module.css";
 import PropTypes from "prop-types";
@@ -5,15 +9,14 @@ import style from "./Checkbox.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function TodoListItem({ task, onRemoveTodo, onUpdateTodo }) {
+function TodoListItem({ task, onRemoveTodo, isDarkMode, onUpdateTodo, }) {
   const { id, title } = task;
-  //  console.log(typeof onUpdateTodo)
   const [isChecked, setIsChecked] = useState(task.completed || false); //checkbox
 
   const handleCheckboxChange = async () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-    await onUpdateTodo(id, { Checkbox: newIsChecked });
+    await onUpdateTodo(id, {  CheckBox: newIsChecked });
   };
 
   // Use the checked status to determine whether to cross out the todo item
@@ -21,25 +24,28 @@ function TodoListItem({ task, onRemoveTodo, onUpdateTodo }) {
 
   return (
     <li>
-      <div style={itemStyle}>
-      
+      <div>
         <input
           className={style.checkbox_linethrough}
-          id={id} // attribute was added to the input element to fix the issue with the label's for attribute not matching any form field id.
+          id={id}
           type="checkbox"
           checked={isChecked}
           onChange={handleCheckboxChange}
         />
 
-        <label className={styles.ListItem} htmlFor={id}></label>
-        {title}
+        <label className={styles.ListItem} htmlFor={id} style={itemStyle}>
+          {title}
+        </label>
         <button
-          className={styles.DeleteButton}
+          className={`${styles.DeleteButton} ${
+            isDarkMode
+              ? styles.darkThemeDeleteButton
+              : styles.lightThemeDeleteButton
+          }`}
           type="button"
           onClick={() => onRemoveTodo(id)}
         >
-          <FontAwesomeIcon icon={faTrash} />
-          {/* Delete */}
+          <FontAwesomeIcon className={styles.trashIcon} icon={faTrash} />
         </button>
       </div>
     </li>

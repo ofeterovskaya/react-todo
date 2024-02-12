@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import p5 from 'p5';
+import PropTypes from "prop-types";
 
 export const P5Wrapper = ({ sketch }) => {
   const myRef = useRef();
@@ -11,7 +12,7 @@ export const P5Wrapper = ({ sketch }) => {
   return <div ref={myRef} />;
 };
 
-const background = (p) => {
+const DynamicBackground = (p) => {
     let stars = [];
     const starsCount = 2000;
   
@@ -48,4 +49,9 @@ const background = (p) => {
       };
   };
 
-export default background;
+
+  DynamicBackground.propTypes = {
+    color: PropTypes.string,
+    imageUrl: PropTypes.string
+};
+export default DynamicBackground;

@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong");
+/* Styles for the HomePage component */
+.Loading {
+  font-size: 2em;
+  color: #035e5e;
+  text-align: center;
+  padding: 50px 0;
+}
+.HomePage {
+  width: 80%;
+  /* background-color:#e6eeff; */
+  font-family: "Salsa", italic;
+  align-content: center;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  box-sizing: border-box;
+}
+/* Styles for the text within the HomePage component */
+.Text {
+  margin-right: 5%;
+  margin-left: 5%;
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 0.2em;
+  line-height: 1.6;
+  padding-bottom: 2%;
+}
+/* Styles for the h1 within the Text class */
+.Text h1 {
+  font-family: "Audiowide", sans-serif;
+  text-align: center;
+  padding-left: 10%;
+}
+
+/* Styles for the HomePage component when in dark mode */
+.DarkModeHomePage {
+  background-color: #00184d;
+  color: #e6eeff;
+}
+/* Styles for the HomePage component when in light mode */
+.LightModeHomePage {
+  background-color: #e6eeff;
+  color: #00184d;
+}
+.modeButton {
+    font-family: "Trirong";
+    font-weight: bold;
+    margin-bottom: 2%;
+    cursor: pointer;
+    /* margin-bottom: 10%; */
+    font-size: 20px;
+    border: 1px solid #035e5e;
+    border-radius: 5px;
+    box-shadow: #035e5e 0 3px 5px 0;
+    /* width:100%; */
+    float: right;
+}
+/* dark mode btn when in light mode  */
+.darkThemeModeButton {
+  background-color: rgb(218, 231, 241);
+  color: #00184d;
+  
+}
+/* ligh mode btn when in dark mode  */
+.lightThemeModeButton {
+  background-color: rgb(6, 15, 58);
+  color: rgb(231, 235, 238);
+  
+}
+/*  Styles for the GoToTodoListButton when in dark mode */
+.darkThemeGoToTodoListButton {
+  background-color: rgb(218, 231, 241);
+  color: #00184d;
+}
+/* Styles for the GoToTodoListButton when in light mode */
+.lightThemeGoToTodoListButton {
+  background-color: rgb(6, 15, 58);
+  color: rgb(218, 231, 241);
+}
+/* Styles for the GoToTodoListButton when hovered in dark mode */
+.darkThemeGoToTodoListButton:hover,
+.darkThemeModeButton:hover {
+  background-color: #91111d;
+  color: rgb(218, 231, 241);
+}
+
+/* Styles for the GoToTodoListButton when hovered in light mode */
+.lightThemeGoToTodoListButton:hover,
+.lightThemeModeButton:hover {
+  background-color: #91111d;
+  color: rgb(218, 231, 241);
+}
+
+/* Styles for the h1 within the Text class when in light mode */
+.light-theme .Text h1 {
+  color: #00184d;
+}
+/* Styles for the GoToTodoListButton */
+.GoToTodoListButton {
+  font-family: "Trirong";
+  font-weight: bold;
+  margin-bottom: 2%;
+  cursor: pointer;
+  width: 20%;
+  font-size: 20px;
+  border: 1px solid #035e5e;
+  border-radius: 5px;
+  box-shadow: #035e5e 0 3px 5px 0;
+  font-family: "Audiowide", sans-serif;
+  padding: 2px;
+  letter-spacing: 1px;
+}
+.GoToTodoListButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Styles for the container of the Sort button */
+.SortButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SortButton {
+  font-family: "Trirong";
+  margin: 2%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  border: 1px solid #035e5e;
+  border-radius: 5px;
+  box-shadow: #035e5e 0 3px 5px 0;
+  font-family: "Audiowide", sans-serif;
+  letter-spacing: 1px;
+}
+.GoBackButton{
+    size: 20px;
+    font-family: "Trirong";
+    font-weight: bold;
+    margin-bottom: 2%;
+    cursor: pointer;
+    width: 10%;
+    font-size: 20px;
+    border: 1px solid #035e5e;
+    border-radius: 5px;
+    box-shadow: #035e5e 0 3px 5px 0;
+    background-color: rgb(218, 231, 241);
+    color: #00184d;
+    margin-top: 5px;
+
+}
+.GoBackButton:hover{
+    background-color: #91111d;
+    color: rgb(218, 231, 241);
+}
+.topButtonContainer{
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 20px; */
+}

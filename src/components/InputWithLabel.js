@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import styles from "./TodoListItem.module.css";
+// import styles from "./TodoListItem.module.css";
 import PropTypes from "prop-types";
 
 function InputWithLabel({
@@ -18,9 +18,7 @@ function InputWithLabel({
 
   return (
     <>
-      <label className={styles.LabelItem} htmlFor={id}>
-        {children}
-      </label>
+      <label htmlFor={id}>{children}</label>
       &nbsp;
       <input
         type={type}

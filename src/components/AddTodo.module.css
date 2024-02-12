@@ -1,0 +1,46 @@
+.AddButton {
+   padding: 10px 30px 10px 30px;
+   border: 1px solid #024646;
+   border-radius: 5px;
+   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
+   font-size: 16px;
+   font-weight: bold;
+}
+.DarkThemeAddButton {
+   color:#00184d;
+   background-color: rgb(218, 231, 241);}
+.LightThemeAddButton {
+   color:rgb(248, 248, 248) ;
+   background-color:#00184d ;
+}
+.DarkThemeAddButton:hover,
+.LightThemeAddButton:hover {
+   background-color: #91111D;
+   color:rgb(218, 231, 241);
+}
+
+ .TodoListContent {
+    display: inline;
+    padding: 25px;
+ }
+ input{
+   width: 40%;
+   line-height: 30px;
+   padding:0 10px;
+   letter-spacing: 1px;
+}
+
+ /* .ListItem {
+  margin-top: 10%;  
+ } */
+ /* .Input {
+   padding:0 10px;
+   margin: 5px;
+   border: 1px solid #024646;
+   border-radius: 5px;
+   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
+   font-size: 16px;
+   line-height: 30px;
+   width: 40%;   
+} */
+

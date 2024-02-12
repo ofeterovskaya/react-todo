@@ -1,17 +1,25 @@
+// TodoList receives a list of todos and two functions (onRemoveTodo and updateData) as props,
+// and it maps over the todos to create a TodoListItem for each one.
+
 import TodoListItem from "./TodoListItem";
 import React from "react";
-import styles from "./TodoListItem.module.css";
 import PropTypes from "prop-types";
+import styles from "./TodoList.module.css";
 
-const TodoList = ({task, todoList, onRemoveTodo, onUpdateTodo }) => {
-
+const TodoList = ({ todoList, onRemoveTodo, updateData }) => {
   return (
-    <ul className={styles.TodoListContent}>
-    
-      {todoList.map((todo) => (
-       <TodoListItem key={todo.id} task={todo} onRemoveTodo={onRemoveTodo} onUpdateTodo={onUpdateTodo} />
-      ))}
-    </ul>
+    <div>
+      <ul className={styles.TodoListContent}>
+        {todoList.map((todo) => (
+          <TodoListItem
+            key={todo.id}
+            task={todo}
+            onRemoveTodo={onRemoveTodo}
+            onUpdateTodo={updateData}
+          />
+        ))}
+      </ul>
+    </div>
   );
 };
 
@@ -23,6 +31,7 @@ TodoList.propTypes = {
     })
   ),
   onRemoveTodo: PropTypes.func.isRequired,
+  updateData: PropTypes.func.isRequired,
 };
 
 export default TodoList;
