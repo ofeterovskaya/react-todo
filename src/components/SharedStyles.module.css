@@ -169,3 +169,7 @@
   align-items: center;
   /* margin-bottom: 20px; */
 }
+.Loading{
+  color: white;
+  text-align: center;
+}

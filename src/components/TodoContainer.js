@@ -182,6 +182,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
       });
     });
   }, [sortOrder]);
+  console.log(isLoading);
   return (
     <>
       <TodoView

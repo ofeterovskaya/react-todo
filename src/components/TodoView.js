@@ -21,7 +21,7 @@ const TodoView = ({
   handleSwitch,
 }) => {
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className= {styles.Loading}> Loading...</p>;
   }
   return (
     <>
