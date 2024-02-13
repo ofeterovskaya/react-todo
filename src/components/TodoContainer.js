@@ -86,12 +86,10 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
       }
 
       const addedTodo = await response.json();
-      setTodoList((prevTodoList) =>
-        Array.from(prevTodoList, {
-          id: addedTodo.id,
-          title: addedTodo.fields.title,
-        })
-      );
+      setTodoList((prevTodoList) => [
+        ...prevTodoList,
+        { id: addedTodo.id, title: addedTodo.fields.title },
+      ]);
       //  update the local state directly
 
       // Handle errors during adding a todo
@@ -169,7 +167,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
   // listen for the "sortOrder" changes and resort the "todoList" as a side effect
   useEffect(() => {
     setTodoList((prevTodoList) => {
-      return Array.from(prevTodoList).sort((todoA, todoB) => {
+      return prevTodoList.sort((todoA, todoB) => {
         // when you use a "?." after a property, it's called
         // "optional chaining" which attempts to access a
         // potentially undefined property of an Object or Array

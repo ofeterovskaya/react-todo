@@ -50,21 +50,10 @@ const TodoView = ({
             <button
               type="button"
               className={styles.SortButton}
-              onClick={() => {
-                handleSortToggle("asc");               
-              }}
+              onClick={handleSortToggle}            
+              
             >
-              <FaSortAlphaDown /> Sort A-Z
-            </button>
-            <button
-              type="button"
-              className={styles.SortButton}
-              onClick={() => {
-                handleSortToggle("desc");
-                fetchData();
-              }}
-            >
-              <FaSortAlphaUpAlt /> Sort Z-A
+              {sortOrder==="asc"? <> <FaSortAlphaUpAlt/> Sort Z-A </> : <> <FaSortAlphaDown />  Sort A-Z </>}
             </button>
           </div>
           <TodoList
