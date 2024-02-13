@@ -1,0 +1,31 @@
+.Footer {
+  background-color: #00184d;
+  color: #e6eeff;
+  padding: 0.5%;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  letter-spacing: 10px;
+  font-size: 30px;
+}
+.Footer .fab.fa-linkedin {
+  color: #e8edf0; /* LinkedIn's brand color */
+  font-size: 24px; /* Change this to adjust the size of the icon */
+  float: right;
+}
+.socialIconContainer {
+  display: flex;
+  justify-content:  flex-end;
+  width: 100px; 
+}
+.socialIcon {
+  color: rgb(233, 231, 238);
+  font-size: 24px;
+  float: right; 
+  margin-right: 10px; 
+  
+}
+

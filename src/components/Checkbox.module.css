@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong");
+
+.checkbox_linethrough{
+    width: 30px;
+    height: 30px;
+    display: block;
+    float: left;
+    margin-left: 20%;
+    accent-color: rgb(63, 26, 196);
+}
+ 
+  

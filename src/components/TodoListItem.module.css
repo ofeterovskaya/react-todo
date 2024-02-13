@@ -1,33 +1,104 @@
 /* import styled from 'styled-components'; */
 @import url("https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong");
+* {
+   box-sizing: border-box;
+   margin: 0px;
+   padding: 0px;     
+}
 
-body {
-   background-image: linear-gradient(to right,rgb(159, 216, 231),rgb(240, 138, 223));
-   font-family: 'Salsa', italic;
-   padding: 40px;
-   text-align: center;   
-   font-size:30px;
-   color:rgb(2, 43, 40);   
- }  
-h1 {
-   font-family: "Audiowide", sans-serif;   
-   }
+body{
+   height: 100vh;
+}
+
 li {
    list-style: none
 }   
 .ListItem {
    font-family: "Sofia", sans-serif;
-   color: rgb(68, 2, 38);
    margin: 5px;   
 }
-.CheckBox {  
-   width: 20px;
+.DeleteButton{
+   color:rgb(248, 248, 248);
+   background-color: #00184d; 
+   display: block;
+   float: right;
+   margin-right: 20%;
+  
+}
+.darkThemeDeleteButton {
+   background-color:rgb(248, 248, 248);
+   color: #00184d; 
+}
+
+.lightThemeDeleteButton {
+   color: #00184d;
+   background-color: rgb(248, 248, 248);
 }
 .trashIcon {
-   width: 50px;
-   height: 50px;
+   width: 20px;
+   height: 20px;
 }
-button {
+.trashIcon:hover {
+   background-color: #91111d;
+   color: rgb(218, 231, 241);
+}
+
+/* body {  
+   font-family: 'Salsa', italic;
+   padding: 10px;
+   text-align: center;   
+   font-size:30px;
+   color:rgb(2, 43, 40);      
+   align-content: center;
+   display: flex;
+   flex-direction: column;
+   grid-template-rows: auto 1fr;
+   min-height: 100vh;
+   margin: 0;
+   padding: 0;  
+}  */
+
+
+/* .todoSection {  
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 2%;
+   margin-bottom: 2%;
+   transform: translate(-50%, -50%);
+   display: flex;
+   flex-direction: column;
+   top: 50%;
+   left: 50%;
+   position: absolute;
+   width: 80%;
+   box-sizing: border-box;
+} */
+/* h1 {
+   font-family: "Audiowide", sans-serif;   
+   text-align: center;
+   padding-left: 15%;
+   } */
+/* li {
+   list-style: none
+}    */
+/* .ListItem {
+   font-family: "Sofia", sans-serif;
+   margin: 5px;   
+} */
+
+/* adding to do list  */
+/* .Input {
+   padding:0 10px;
+   margin: 5px;
+   border: 1px solid #024646;
+   border-radius: 5px;
+   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
+   font-size: 16px;
+   line-height: 30px;
+   width: 40%;   
+} */
+
+/* button {
    font-family: "Trirong";
    font-weight: bold;
    margin-top: 1%;
@@ -36,19 +107,20 @@ button {
    cursor: pointer;
    border: 1px solid #024646;
    border-radius: 5px;
-   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
+   box-shadow: rgba(147, 145, 221, 0.5) 0 3px 5px 0;
 }
 button:hover {
    color:rgb(248, 248, 248);
    background-color:rgba(0, 11, 11, 0.5);
-}
-.AddButton {
+} */
+/* .AddButton {
    color:rgb(248, 248, 248);
    background-color:rgba(0, 11, 11, 0.5);
    padding: 10px 30px 10px 30px;
-}
-input {
-   padding:0 5%;
+} */
+
+/* input {
+   padding:0 10px;
    margin: 5px;
    border: 1px solid #024646;
    border-radius: 5px;
@@ -56,28 +128,37 @@ input {
    font-size: 16px;
    line-height: 30px;
    width: 40%;   
-}
-.LabelItem{
+} */
+/* .LabelItem{
    color:  rgba(0, 11, 11, 0.5);
    font-weight: bold;
+} */
 
+/* .dark-theme .AddButton { 
+   color:rgb(6, 15, 58);
+   background-color: rgb(218, 231, 241);
+} */
+/* .dark-theme .AddButton :hover{ 
+   background-color: red;
+} */
+/* .dark-theme .DeleteButton {
+   color:rgb(6, 15, 58);
+   background-color: rgb(218, 231, 241);
 }
+.dark-theme .InputWithLabel{
+   color:rgb(167, 224, 240)
+} */
+/* .light-theme {
+   color: rgb(2, 11, 58);
+   background-color:rgb(167, 224, 240);
 
-.Toggle {
-   float:right;
-   width: 10%;
-   cursor:pointer;   
-}
-.dark-theme { 
-   color: black; 
-   background-image: white;
-  
-}
-.light-theme {
-   color:aliceblue;
-   background-color: black;
-}
-@media (max-width: 280px) {
+} */
+
+/* .SortButton{
+   color: darkblue;
+   size: 14px;
+} */
+/* @media (max-width: 280px) {
 
 body{ 
    font-size: 16px;
@@ -92,10 +173,7 @@ button {
 .AddButton {
    padding: 5px 20px 5px 20px;
 }
-input {
-   line-height: 30px;
-   width: 80%; 
-}
+
 .TodoListContent {
    display: inline;
    padding: 25px;
@@ -129,4 +207,4 @@ input {
    margin-top: 10%;  
 }
 }
-
+ */
