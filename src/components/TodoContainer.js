@@ -1,4 +1,4 @@
-//manages the state and behavior of your todo list. It interacts with an Airtable API to fetch, add, delete, and update todo items.
+//manages the state and behavior of todo list. It interacts with an Airtable API to fetch, add, delete, and update todo items.
 //It also handles the sorting of the todo list and the switching between dark and light modes.
 
 import React, { useState, useEffect, useCallback } from "react";
@@ -9,7 +9,6 @@ import TodoView from "./TodoView";
 //import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import styles from "./TodoListItem.module.css";
 import Toggle from "./Toggle";
-
 
 const AirtableUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
@@ -31,7 +30,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
 
     // Define the URL for the Airtable API
     try {
-      const response = await fetch(`${AirtableUrl}`, options);
+      const response = await fetch(AirtableUrl, options);
       if (!response.ok) {
         const message = `Error has ocurred: ${response.status}`;
         throw new Error(message);
@@ -78,7 +77,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
 
     try {
       // Send a POST request to add a new todo. Fetch data from the API
-      const response = await fetch(`${AirtableUrl}`, options);
+      const response = await fetch(AirtableUrl, options);
 
       // Check if the response is not successful
       if (!response.ok) {
@@ -87,10 +86,12 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
       }
 
       const addedTodo = await response.json();
-      setTodoList((prevTodoList) => [
-        ...prevTodoList,
-        { id: addedTodo.id, title: addedTodo.fields.title },
-      ]);
+      setTodoList((prevTodoList) =>
+        Array.from(prevTodoList, {
+          id: addedTodo.id,
+          title: addedTodo.fields.title,
+        })
+      );
       //  update the local state directly
 
       // Handle errors during adding a todo
@@ -161,54 +162,44 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
   //   After sorting, the sorted list is set as the new state for todoList.
   //
 
-  const sortData = useCallback(() => {
+  // toggle the sort order from "asc" to "desc" and vice versa
+  const handleSortToggle = () =>
+    setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
+
+  // listen for the "sortOrder" changes and resort the "todoList" as a side effect
+  useEffect(() => {
     setTodoList((prevTodoList) => {
-      const sorted = [...prevTodoList].sort((objectA, objectB) => {
-        const titleA = objectA.title ? objectA.title.toUpperCase() : "";
-        const titleB = objectB.title ? objectB.title.toUpperCase() : "";
+      return Array.from(prevTodoList).sort((todoA, todoB) => {
+        // when you use a "?." after a property, it's called
+        // "optional chaining" which attempts to access a
+        // potentially undefined property of an Object or Array
+        const titleA = todoA.title?.toUpperCase();
+        const titleB = todoB.title?.toUpperCase();
 
-        if (titleA < titleB) {
-          return sortOrder === "asc" ? -1 : 1;
-        } else if (titleA > titleB) {
-          return sortOrder === "asc" ? 1 : -1;
-        } else {
-          return 0;
-        }
+        if (titleA === titleB) return 0;
+
+        if (titleA < titleB) return sortOrder === "asc" ? -1 : 1;
+
+        return sortOrder === "asc" ? 1 : -1;
       });
-
-      // Only return the sorted array if it's different from the current one otherwise got an infinite loop
-      if (JSON.stringify(sorted) === JSON.stringify(prevTodoList)) {
-        return prevTodoList;
-      } else {
-        return sorted;
-      }
     });
   }, [sortOrder]);
-
-  useEffect(() => {
-    sortData();
-  }, [todoList, sortOrder, sortData]);
-
   return (
     <>
       <TodoView
         fetchData={fetchData}
-        onAddTodo={addTodo} 
+        onAddTodo={addTodo}
         removeTodo={removeTodo}
         isLoading={isLoading}
         todoList={todoList}
         sortOrder={sortOrder}
         updateData={updateData}
         setSortOrder={setSortOrder}
-        sortData={sortData}
         isDarkMode={isDarkMode}
         handleSwitch={handleSwitch}
+        handleSortToggle={handleSortToggle}
       />
-      <Toggle
-        isDarkMode={isDarkMode} 
-        onSwitch={handleSwitch} 
-      />
-    
+      <Toggle isDarkMode={isDarkMode} onSwitch={handleSwitch} />
     </>
   );
 }

@@ -9,14 +9,14 @@ import style from "./Checkbox.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function TodoListItem({ task, onRemoveTodo, isDarkMode, onUpdateTodo, }) {
+function TodoListItem({ task, onRemoveTodo, isDarkMode, onUpdateTodo }) {
   const { id, title } = task;
   const [isChecked, setIsChecked] = useState(task.completed || false); //checkbox
 
   const handleCheckboxChange = async () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-    await onUpdateTodo(id, {  CheckBox: newIsChecked });
+    await onUpdateTodo(id, { CheckBox: newIsChecked });
   };
 
   // Use the checked status to determine whether to cross out the todo item
@@ -24,30 +24,28 @@ function TodoListItem({ task, onRemoveTodo, isDarkMode, onUpdateTodo, }) {
 
   return (
     <li>
-      <div>
-        <input
-          className={style.checkbox_linethrough}
-          id={id}
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
+      <input
+        className={style.checkbox_linethrough}
+        id={id}
+        type="checkbox"
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+      />
 
-        <label className={styles.ListItem} htmlFor={id} style={itemStyle}>
-          {title}
-        </label>
-        <button
-          className={`${styles.DeleteButton} ${
-            isDarkMode
-              ? styles.darkThemeDeleteButton
-              : styles.lightThemeDeleteButton
-          }`}
-          type="button"
-          onClick={() => onRemoveTodo(id)}
-        >
-          <FontAwesomeIcon className={styles.trashIcon} icon={faTrash} />
-        </button>
-      </div>
+      <label className={styles.ListItem} htmlFor={id} style={itemStyle}>
+        {title}
+      </label>
+      <button
+        className={`${styles.DeleteButton} ${
+          isDarkMode
+            ? styles.darkThemeDeleteButton
+            : styles.lightThemeDeleteButton
+        }`}
+        type="button"
+        onClick={() => onRemoveTodo(id)}
+      >
+        <FontAwesomeIcon className={styles.trashIcon} icon={faTrash} />
+      </button>
     </li>
   );
 }
@@ -59,6 +57,7 @@ TodoListItem.propTypes = {
     title: PropTypes.string,
   }).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,
+  onUpdateTodo: PropTypes.func.isRequired,
 };
 
 export default TodoListItem;

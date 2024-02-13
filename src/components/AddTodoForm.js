@@ -37,7 +37,9 @@ function AddTodoForm({ onAddTodo, isDarkMode }) {
       &nbsp;
       <button
         type="submit"
-        className={`${styles.AddButton} ${isDarkMode ? styles.DarkThemeAddButton : styles.LightThemeAddButton}`}
+        className={`${styles.AddButton} ${
+          isDarkMode ? styles.DarkThemeAddButton : styles.LightThemeAddButton
+        }`}
       >
         Add
       </button>

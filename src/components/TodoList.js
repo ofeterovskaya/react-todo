@@ -8,18 +8,16 @@ import styles from "./TodoList.module.css";
 
 const TodoList = ({ todoList, onRemoveTodo, updateData }) => {
   return (
-    <div>
-      <ul className={styles.TodoListContent}>
-        {todoList.map((todo) => (
-          <TodoListItem
-            key={todo.id}
-            task={todo}
-            onRemoveTodo={onRemoveTodo}
-            onUpdateTodo={updateData}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul className={styles.TodoListContent}>
+      {todoList.map((todo) => (
+        <TodoListItem
+          key={todo.id}
+          task={todo}
+          onRemoveTodo={onRemoveTodo}
+          onUpdateTodo={updateData}
+        />
+      ))}
+    </ul>
   );
 };
 
