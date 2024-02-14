@@ -18,14 +18,38 @@
 }
 .socialIconContainer {
   display: flex;
-  justify-content:  flex-end;
-  width: 100px; 
+  justify-content: flex-end;
+  width: 100px;
 }
 .socialIcon {
   color: rgb(233, 231, 238);
   font-size: 24px;
-  float: right; 
-  margin-right: 10px; 
-  
+  float: right;
+  margin-right: 10px;
 }
-
+@media screen and (max-width: 978px) {
+  .Footer {
+    letter-spacing: 2px;
+    font-size: 22px;
+    height: 10%;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 460px) {
+  .Footer {
+    letter-spacing: 2px;
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 280px) {
+  .Footer {
+    letter-spacing: 2px;
+    font-size: 18px;
+  }
+  .socialIconContainer {
+    justify-content: center;
+  }
+  .socialIcon {
+    align-items: center;
+  }
+}

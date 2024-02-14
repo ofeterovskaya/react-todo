@@ -1,21 +1,9 @@
-/* .todoSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 80%;
-  margin: 0 auto; 
-  box-sizing: border-box;
-  background-color: #e6eeff;
-} */
-
-.AddButton {
+/* .AddButton {
     color:rgb(248, 248, 248);
     background-color:rgba(0, 11, 11, 0.5);
     padding: 10px 30px 10px 30px;
-}
-.LabelItem{
+} */
+/* .LabelItem{
     color:  rgba(0, 11, 11, 0.5);
     font-weight: bold;
 }
@@ -33,4 +21,4 @@
 .SortButton{
     color: darkblue;
     size: 14px;
-}
+} */

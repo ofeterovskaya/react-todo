@@ -21,7 +21,7 @@ const TodoView = ({
   handleSwitch,
 }) => {
   if (isLoading) {
-    return <p className= {styles.Loading}> Loading...</p>;
+    return <p className={styles.Loading}> Loading...</p>;
   }
   return (
     <>
@@ -50,19 +50,26 @@ const TodoView = ({
             <button
               type="button"
               className={styles.SortButton}
-              onClick={handleSortToggle}            
-              
+              onClick={handleSortToggle}
             >
-              {sortOrder==="asc"? <> <FaSortAlphaUpAlt/> Sort Z-A </> : <> <FaSortAlphaDown />  Sort A-Z </>}
+              {sortOrder === "asc" ? (
+                <>
+                  {" "}
+                  <FaSortAlphaUpAlt /> Sort Z-A{" "}
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <FaSortAlphaDown /> Sort A-Z{" "}
+                </>
+              )}
             </button>
           </div>
           <TodoList
             todoList={todoList}
             onRemoveTodo={removeTodo}
-            // sortOrder={sortOrder}
             updateData={updateData}
             isDarkMode={isDarkMode}
-            // handleSwitch={handleSwitch}
           />
         </div>
       </div>

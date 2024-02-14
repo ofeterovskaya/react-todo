@@ -13,10 +13,10 @@ function TodoListItem({ task, onRemoveTodo, isDarkMode, onUpdateTodo }) {
   const { id, title } = task;
   const [isChecked, setIsChecked] = useState(task.completed || false); //checkbox
 
-  const handleCheckboxChange =  () => {
+  const handleCheckboxChange = () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-     onUpdateTodo(id, { CheckBox: newIsChecked });
+    onUpdateTodo(id, { CheckBox: newIsChecked });
   };
 
   // Use the checked status to determine whether to cross out the todo item

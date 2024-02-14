@@ -8,7 +8,7 @@ import TodoView from "./TodoView";
 //import AddTodoForm from "./AddTodoForm";
 //import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import styles from "./TodoListItem.module.css";
-import Toggle from "./Toggle";
+// import Toggle from "./Toggle";
 
 const AirtableUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
@@ -182,7 +182,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
       });
     });
   }, [sortOrder]);
-  console.log(isLoading);
+
   return (
     <>
       <TodoView
@@ -198,7 +198,6 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
         handleSwitch={handleSwitch}
         handleSortToggle={handleSortToggle}
       />
-      <Toggle isDarkMode={isDarkMode} onSwitch={handleSwitch} />
     </>
   );
 }

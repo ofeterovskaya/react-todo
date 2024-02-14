@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import p5 from 'p5';
 import PropTypes from "prop-types";
+import styles from "./SharedStyles.module.css"
 
 export const P5Wrapper = ({ sketch }) => {
   const myRef = useRef();
@@ -9,7 +10,7 @@ export const P5Wrapper = ({ sketch }) => {
     new p5(sketch, myRef.current);
   }, [sketch]);
 
-  return <div ref={myRef} />;
+  return <div className = {styles.DynamicBackground} ref={myRef} />;
 };
 
 const DynamicBackground = (p) => {

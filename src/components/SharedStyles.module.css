@@ -2,14 +2,13 @@
 /* Styles for the HomePage component */
 .Loading {
   font-size: 2em;
-  color: #035e5e;
+  color: white;
   text-align: center;
   padding: 50px 0;
 }
 .HomePage {
   width: 80%;
-  /* background-color:#e6eeff; */
-  font-family: "Salsa", italic;
+  font-family: "Salsa", sans-serif;
   align-content: center;
   display: grid;
   grid-template-rows: auto 1fr;
@@ -51,29 +50,24 @@
   color: #00184d;
 }
 .modeButton {
-    font-family: "Trirong";
-    font-weight: bold;
-    margin-bottom: 2%;
-    cursor: pointer;
-    /* margin-bottom: 10%; */
-    font-size: 20px;
-    border: 1px solid #035e5e;
-    border-radius: 5px;
-    box-shadow: #035e5e 0 3px 5px 0;
-    /* width:100%; */
-    float: right;
+  font-family: "Trirong";
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 20px;
+  border: 1px solid #035e5e;
+  border-radius: 5px;
+  box-shadow: #035e5e 0 3px 5px 0;
+  float: right;
 }
 /* dark mode btn when in light mode  */
 .darkThemeModeButton {
   background-color: rgb(218, 231, 241);
   color: #00184d;
-  
 }
 /* ligh mode btn when in dark mode  */
 .lightThemeModeButton {
   background-color: rgb(6, 15, 58);
   color: rgb(231, 235, 238);
-  
 }
 /*  Styles for the GoToTodoListButton when in dark mode */
 .darkThemeGoToTodoListButton {
@@ -143,33 +137,127 @@
   font-family: "Audiowide", sans-serif;
   letter-spacing: 1px;
 }
-.GoBackButton{
-    size: 20px;
-    font-family: "Trirong";
-    font-weight: bold;
-    margin-bottom: 2%;
-    cursor: pointer;
-    width: 10%;
-    font-size: 20px;
-    border: 1px solid #035e5e;
-    border-radius: 5px;
-    box-shadow: #035e5e 0 3px 5px 0;
-    background-color: rgb(218, 231, 241);
-    color: #00184d;
-    margin-top: 5px;
-
-}
-.GoBackButton:hover{
-    background-color: #91111d;
-    color: rgb(218, 231, 241);
-}
-.topButtonContainer{
-    display: flex;
+.topButtonContainer {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 20px; */
 }
-.Loading{
-  color: white;
-  text-align: center;
+.GoBackButton {
+  size: 20px;
+  font-family: "Trirong";
+  font-weight: bold;
+  cursor: pointer;
+  width: 10%;
+  font-size: 20px;
+  border: 1px solid #035e5e;
+  border-radius: 5px;
+  box-shadow: #035e5e 0 3px 5px 0;
+  background-color: rgb(218, 231, 241);
+  color: #00184d;
+}
+.GoBackButton:hover {
+  background-color: #91111d;
+  color: rgb(218, 231, 241);
+}
+@media screen and (max-width: 978px) {
+  .HomePage {
+    width: 80%;
+  }
+  .Text {
+    font-size: 14px;
+  }
+
+  .GoToTodoListButton {
+    width: 40%;
+  }
+  .SortButton {
+    font-size: 14px;
+  }
+  .modeButton {
+    font-size: 18px;
+  }
+  .GoBackButton {
+    font-size: 18px;
+    width: 10%;
+  }
+}
+@media screen and (max-width: 883px) {
+  .HomePage {
+    width: 80%;
+  }
+  .Text {
+    font-size: 14px;
+  }
+  .modeButton {
+    font-size: 18px;
+  }
+  .GoBackButton {
+    font-size: 16px;
+    width: 15%;
+  }
+}
+@media screen and (max-width: 531px){
+  .modeButton {
+    font-size: 14px;
+  }
+  .GoBackButton {
+    font-size: 14px;
+    width: 20%;
+  }
+}
+@media screen and (max-width: 460px){
+  .HomePage {
+    width: 100%;
+  }
+  .Text {
+    font-size: 16px;
+  }
+  .Text h1 {
+    font-size: 26px;
+  }
+  .GoToTodoListButton {
+    width: 100%;
+  }
+  .SortButton {
+    font-size: 14px;
+    margin-top: 5%;
+  }
+  .modeButton {
+    font-size: 12px;
+  }
+  .GoBackButton {
+    font-size: 12px;
+    width: 15%;
+  }
+  .DynamicBackground {
+    display: none;
+  }
+}
+@media screen and (max-width: 280px) {
+  .HomePage {
+    width: 100%;
+  }
+  .Text {
+    font-size: 16px;
+  }
+  .Text h1 {
+    font-size: 26px;
+  }
+  .GoToTodoListButton {
+    width: 100%;
+  }
+  .SortButton {
+    font-size: 14px;
+    margin-top: 5%;
+  }
+  .modeButton {
+    font-size: 12px;
+  }
+  .GoBackButton {
+    font-size: 12px;
+    width: 25%;
+  }
+  .DynamicBackground {
+    display: none;
+  }
 }

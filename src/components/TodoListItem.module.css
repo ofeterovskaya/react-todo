@@ -14,15 +14,16 @@ li {
    list-style: none
 }   
 .ListItem {
-   font-family: "Sofia", sans-serif;
+   font-family: sans-serif;
    margin: 5px;   
+   display: inline-block;
 }
 .DeleteButton{
    color:rgb(248, 248, 248);
    background-color: #00184d; 
    display: block;
    float: right;
-   margin-right: 20%;
+   margin-right: 15%;
   
 }
 .darkThemeDeleteButton {
@@ -42,169 +43,23 @@ li {
    background-color: #91111d;
    color: rgb(218, 231, 241);
 }
-
-/* body {  
-   font-family: 'Salsa', italic;
-   padding: 10px;
-   text-align: center;   
-   font-size:30px;
-   color:rgb(2, 43, 40);      
-   align-content: center;
-   display: flex;
-   flex-direction: column;
-   grid-template-rows: auto 1fr;
-   min-height: 100vh;
-   margin: 0;
-   padding: 0;  
-}  */
-
-
-/* .todoSection {  
-   margin-left: auto;
-   margin-right: auto;
-   margin-top: 2%;
-   margin-bottom: 2%;
-   transform: translate(-50%, -50%);
-   display: flex;
-   flex-direction: column;
-   top: 50%;
-   left: 50%;
-   position: absolute;
-   width: 80%;
-   box-sizing: border-box;
-} */
-/* h1 {
-   font-family: "Audiowide", sans-serif;   
-   text-align: center;
-   padding-left: 15%;
-   } */
-/* li {
-   list-style: none
-}    */
-/* .ListItem {
-   font-family: "Sofia", sans-serif;
-   margin: 5px;   
-} */
-
-/* adding to do list  */
-/* .Input {
-   padding:0 10px;
-   margin: 5px;
-   border: 1px solid #024646;
-   border-radius: 5px;
-   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
-   font-size: 16px;
-   line-height: 30px;
-   width: 40%;   
-} */
-
-/* button {
-   font-family: "Trirong";
-   font-weight: bold;
-   margin-top: 1%;
-   margin-left: 1%;
-   padding: 5px;
-   cursor: pointer;
-   border: 1px solid #024646;
-   border-radius: 5px;
-   box-shadow: rgba(147, 145, 221, 0.5) 0 3px 5px 0;
-}
-button:hover {
-   color:rgb(248, 248, 248);
-   background-color:rgba(0, 11, 11, 0.5);
-} */
-/* .AddButton {
-   color:rgb(248, 248, 248);
-   background-color:rgba(0, 11, 11, 0.5);
-   padding: 10px 30px 10px 30px;
-} */
-
-/* input {
-   padding:0 10px;
-   margin: 5px;
-   border: 1px solid #024646;
-   border-radius: 5px;
-   box-shadow: rgba(2, 105, 105, 0.5) 0 2px 5px 0;
-   font-size: 16px;
-   line-height: 30px;
-   width: 40%;   
-} */
-/* .LabelItem{
-   color:  rgba(0, 11, 11, 0.5);
-   font-weight: bold;
-} */
-
-/* .dark-theme .AddButton { 
-   color:rgb(6, 15, 58);
-   background-color: rgb(218, 231, 241);
-} */
-/* .dark-theme .AddButton :hover{ 
-   background-color: red;
-} */
-/* .dark-theme .DeleteButton {
-   color:rgb(6, 15, 58);
-   background-color: rgb(218, 231, 241);
-}
-.dark-theme .InputWithLabel{
-   color:rgb(167, 224, 240)
-} */
-/* .light-theme {
-   color: rgb(2, 11, 58);
-   background-color:rgb(167, 224, 240);
-
-} */
-
-/* .SortButton{
-   color: darkblue;
-   size: 14px;
-} */
-/* @media (max-width: 280px) {
-
-body{ 
-   font-size: 16px;
-   font-weight: bold;
-   padding: 25px;
-}
-button {
-   margin-top: 0%;
-   margin-left: 0%;
-   padding: 2px;
-}
-.AddButton {
-   padding: 5px 20px 5px 20px;
-}
-
-.TodoListContent {
-   display: inline;
-   padding: 25px;
-}
-.ListItem {
- margin-top: 10%;  
-}
+@media screen and (max-width: 720px){
+   .DeleteButton {      
+      margin-right: 2%;
+  }
 
 }
+@media screen and (max-width: 720px) {
+   body{
+      background-color: #00184d;
+   }
+}
+@media screen and (max-width: 280px) {
 
-@media (max-width: 376px) {
-body{ 
-   font-size: 20px;
+   body{
+      background-color: #00184d;
+   }
+   .DeleteButton {      
+       margin-right: 2%;
+   }
 }
-button {
-   margin-left: 3%;
-   padding: 2px;
-}
-.AddButton {
-   padding: 5px 30px 5px 30px;
-}
-input {
-   line-height: 30px;
-   width: 80%; 
-}
-.TodoListContent {
-   display: inline;
-   padding: 25px;
-}
-.ListItem {
-   margin-top: 10%;  
-}
-}
- */
