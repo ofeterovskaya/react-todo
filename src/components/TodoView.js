@@ -7,6 +7,7 @@ import { FaSortAlphaDown, FaSortAlphaUpAlt } from "react-icons/fa";
 import Toggle from "./Toggle";
 import Footer from "./Footer";
 import GoBack from "./GoBack";
+import Greeting from "./Greeting";
 
 const TodoView = ({
   onAddTodo,
@@ -19,6 +20,7 @@ const TodoView = ({
   handleSortToggle,
   isDarkMode,
   handleSwitch,
+ 
 }) => {
   if (isLoading) {
     return <p className={styles.Loading}> Loading...</p>;
@@ -43,6 +45,9 @@ const TodoView = ({
           />
         </div>
         <div className={styles.Text}>
+          <div className={styles.Greeting}>
+            <Greeting />
+          </div>
           <h1>Todo List</h1>
           <AddTodoForm onAddTodo={onAddTodo} isDarkMode={isDarkMode} />
 

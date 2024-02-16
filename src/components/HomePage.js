@@ -5,6 +5,7 @@ import Footer from "./Footer";
 //import toggleStyles from "./Toggle.module.css";
 import { useNavigate } from "react-router-dom";
 
+
 const HomePage = ({ isDarkMode, handleSwitch }) => {
   //Switching between dark and light mode isDarkMode, handleSwitch
 
@@ -25,7 +26,7 @@ const HomePage = ({ isDarkMode, handleSwitch }) => {
           className={`${isDarkMode ? styles.darkThemeModeButton : styles.lightThemeModeButton}`}
           isDarkMode={isDarkMode} 
           onSwitch={handleSwitch} 
-        />
+        />        
         <div className={styles.Text}>
           <h1>Welcome to Todo App!</h1>
           <p>
