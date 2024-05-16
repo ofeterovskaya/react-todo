@@ -25,7 +25,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
     const options = {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_PERSONAL_ACCESS_TOKEN}`,
       },
     };
 
@@ -71,7 +71,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_PERSONAL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify(airtableData),
     };
@@ -87,6 +87,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
       }
 
       const addedTodo = await response.json();
+      console.log(addedTodo);
       setTodoList((prevTodoList) => [
         ...prevTodoList,
         { id: addedTodo.id, title: addedTodo.fields.title },
@@ -105,7 +106,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
     const options = {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_PERSONAL_ACCESS_TOKEN}`,
         "Content-Type": "application/json",
       },
     };
@@ -130,7 +131,7 @@ function TodoContainer({ isDarkMode, handleSwitch }) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_PERSONAL_ACCESS_TOKEN}`,
         // "Authorization": `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
       },
       body: JSON.stringify({
